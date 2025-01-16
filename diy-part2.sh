@@ -68,7 +68,7 @@ CONFIG_PACKAGE_luci-theme-openwrt-2020=y
 # TurboAcc
 #CONFIG_PACKAGE_luci-app-turboacc=y
 
-" >> .config
+" >> Lede.config
 
 # 修改默认IP
 #sed -i 's/192.168.1.1/10.0.0.1/g' package/base-files/files/bin/config_generate
