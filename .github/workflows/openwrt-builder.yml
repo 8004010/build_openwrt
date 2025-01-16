@@ -149,28 +149,28 @@ jobs:
         name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
 
-    #- name: 生成发布标签
-     # id: tag
-     # if: steps.compile.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true' && !cancelled()
-     # run: |
+    - name: 生成发布标签
+      id: tag
+      if: steps.compile.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true' && !cancelled()
+      run: |
         echo "release_tag=$(date +"%Y.%m.%d-%H.%M")" >> ${GITHUB_OUTPUT}
         touch release.txt
         echo "
-      #  💻 架构: x86-64
+        💻 架构: x86-64
 
-      #  📂 源码: ${{ env.REPO_URL }}
+        📂 源码: ${{ env.REPO_URL }}
 
-       # 🌳 分支: ${{ env.REPO_BRANCH }}
+        🌳 分支: ${{ env.REPO_BRANCH }}
 
-      #  ⏱️ 编译时间: $(date +"%Y年%m月%d日%H时%M分")
+        ⏱️ 编译时间: $(date +"%Y年%m月%d日%H时%M分")
 
-      #  🌐 管理地址: 10.0.0.1 , 子网掩码: 255.255.252.0
+        🌐 管理地址: 192.168.1.1 , 子网掩码: 255.255.252.0
 
-     #   👤 用户名: root
+        👤 用户名: root
 
-      #  🔒 密码: 空 
+        🔒 密码: password 
         
-      #  " >> release.txt
+        " >> release.txt
         echo "status=success" >> ${GITHUB_OUTPUT}
 
     - name: List firmware files
@@ -192,7 +192,7 @@ jobs:
       with:
         retain_days: 1
         keep_minimum_runs: 1
-        token: ${{ env.GITHUB_TOKEN }}
+        token: ${{ env.TOKEN }}
 
     - name: 删除自动发布的旧固件
       uses: dev-drprasad/delete-older-releases@master
@@ -200,3 +200,5 @@ jobs:
       with:
         keep_latest: 1
         delete_tags: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
