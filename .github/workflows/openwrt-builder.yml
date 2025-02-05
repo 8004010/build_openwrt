@@ -90,7 +90,7 @@ jobs:
 
     - name: Add smpackage feeds
       run: |
-        cd lede
+        cd openwrt
         echo 'src-git smpackage https://github.com/kenzok8/small-package.git' >> feeds.conf.default  # 添加额外的插件仓库
         ./scripts/feeds update smpackage
         ./scripts/feeds install -a -p smpackage
