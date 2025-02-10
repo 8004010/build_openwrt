@@ -27,12 +27,6 @@ function git_sparse_clone() {
 # 添加额外插件
 #git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
 
-# 添加istore
-echo >> feeds.conf.default
-echo 'src-git istore https://github.com/linkease/istore;main' >> feeds.conf.default
-./scripts/feeds update istore
-./scripts/feeds install -d y -p istore luci-app-store
-
 # 添加主题
 #git clone -b js --single-branch https://github.com/gngpp/luci-theme-design package/luci-theme-design
 # git clone https://github.com/derisamedia/luci-theme-alpha.git package/luci-theme-alpha
